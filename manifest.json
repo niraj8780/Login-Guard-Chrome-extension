@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "LoginGuard – Smart Website & Phishing Detection",
+  "version": "1.0.0",
+  "description": "Automatically analyzes login pages and domain legitimacy to protect you from credential theft and phishing.",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "32": "assets/icons/icon32.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    },
+    "default_title": "LoginGuard Security Status"
+  },
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "content/overlay.js",
+        "content/detector.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://rdap.org/*",
+    "https://*.rdap.net/*",
+    "https://safebrowsing.googleapis.com/*",
+    "http://localhost:3000/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/icons/*",
+        "content/content.css"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

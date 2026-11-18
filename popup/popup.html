@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoginGuard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M12 8v4"/>
+            <path d="M12 16h.01"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">LoginGuard</h1>
+          <p class="brand-tag">Phishing Defense Engine</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-open-settings" class="icon-btn" title="Settings">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content State: When Scanned -->
+    <main id="scanned-view" class="popup-body">
+      <!-- Domain Bar -->
+      <div class="current-site">
+        <span class="label">Target Website</span>
+        <span id="site-hostname" class="hostname">checking...</span>
+      </div>
+
+      <!-- Verdict & Score Gauge -->
+      <div class="verdict-banner">
+        <div class="verdict-pill" id="verdict-badge">
+          <span class="pill-dot"></span>
+          <span id="verdict-text">ANALYZING</span>
+        </div>
+        <div class="risk-meter">
+          <div class="meter-bar-track">
+            <div id="meter-bar-fill" class="meter-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div class="meter-labels">
+            <span>Risk Score:</span>
+            <strong id="risk-score-value">--/100</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Analysis Breakdown -->
+      <div class="checks-summary">
+        <h3 class="section-title">Security Highlights</h3>
+        <ul id="reasons-list" class="reasons-list">
+          <li class="reason-placeholder">Analyzing security parameters...</li>
+        </ul>
+      </div>
+
+      <!-- Timestamp -->
+      <div class="meta-row">
+        <span>Last scan: <span id="scan-timestamp">Just now</span></span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-grid">
+        <button id="btn-full-report" class="btn btn-primary">
+          View Full Report
+        </button>
+        <button id="btn-rescan" class="btn btn-secondary">
+          Re-scan Page
+        </button>
+      </div>
+    </main>
+
+    <!-- Empty State: When No Login Detected -->
+    <main id="empty-view" class="popup-body empty-state" style="display: none;">
+      <div class="empty-icon">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#64748b" stroke-width="1.8">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h2 class="empty-title">No Login Page Detected</h2>
+      <p class="empty-desc">
+        LoginGuard is actively watching this tab. When you visit a page with a login or password field, it will scan automatically.
+      </p>
+      <div class="site-preview-row">
+        <span>Current Domain: </span>
+        <strong id="empty-site-hostname">loading...</strong>
+      </div>
+      <button id="btn-manual-scan" class="btn btn-primary" style="margin-top: 14px;">
+        Scan Current Page Anyway
+      </button>
+    </main>
+
+    <!-- Footer Navigation -->
+    <footer class="popup-footer">
+      <button id="btn-open-history" class="footer-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        Scan History
+      </button>
+      <span class="footer-divider">•</span>
+      <span class="privacy-badge">Zero Credential Collection</span>
+    </footer>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoginGuard - Security Audit Report</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <div class="report-wrapper">
+    <!-- Top Navigation -->
+    <header class="report-nav">
+      <div class="nav-brand">
+        <div class="brand-shield">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M12 8v4"/>
+            <path d="M12 16h.01"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="nav-title">LoginGuard</h1>
+          <p class="nav-sub">Automated Website Security Audit</p>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button id="btn-print" class="btn-action">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          Print / PDF
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Report Body -->
+    <main class="report-content">
+      <!-- Verdict & Score Hero Banner -->
+      <section class="hero-banner" id="hero-banner">
+        <div class="hero-main">
+          <div class="target-site-info">
+            <span class="eyebrow">Target Website Audited</span>
+            <h2 id="report-domain" class="target-domain">loading...</h2>
+            <p id="report-url" class="target-url">loading...</p>
+          </div>
+          <div class="hero-status">
+            <div id="report-verdict-badge" class="verdict-tag tag-SAFE">SAFE</div>
+            <div class="score-display">
+              <span class="score-num" id="report-score">0</span>
+              <span class="score-denom">/100 Risk</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="risk-bar-track">
+          <div id="report-risk-bar" class="risk-bar-fill" style="width: 0%;"></div>
+        </div>
+      </section>
+
+      <!-- Key Findings -->
+      <section class="report-section">
+        <h3 class="section-heading">Verdict Summary & Key Findings</h3>
+        <div id="verdict-summary-box" class="summary-box">
+          <ul id="summary-reasons-list" class="findings-list">
+            <li>Loading security findings...</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Detailed Checklist -->
+      <section class="report-section">
+        <h3 class="section-heading">Security Parameter Breakdown</h3>
+        <div class="checks-grid">
+
+          <!-- 1. Protocol & Transport -->
+          <div class="check-card" id="card-https">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="check-badge" id="badge-https">PENDING</span>
+                <h4>Transport Encryption (HTTPS)</h4>
+              </div>
+            </div>
+            <p class="card-desc" id="desc-https">Validating protocol security...</p>
+            <div class="card-meta" id="meta-https">Chrome manages certificate verification.</div>
+          </div>
+
+          <!-- 2. Lookalike / Brand Impersonation -->
+          <div class="check-card" id="card-lookalike">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="check-badge" id="badge-lookalike">PENDING</span>
+                <h4>Lookalike & Typosquatting Check</h4>
+              </div>
+            </div>
+            <p class="card-desc" id="desc-lookalike">Comparing domain against popular brands via Levenshtein distance...</p>
+            <div class="card-meta" id="meta-lookalike">Tested against 20+ top brands.</div>
+          </div>
+
+          <!-- 3. Domain Structure & Anomalies -->
+          <div class="check-card" id="card-structure">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="check-badge" id="badge-structure">PENDING</span>
+                <h4>Domain Structural Integrity</h4>
+              </div>
+            </div>
+            <p class="card-desc" id="desc-structure">Scanning for Punycode homoglyphs, raw IP usage, and excessive subdomains...</p>
+            <div class="card-meta" id="meta-structure">Checks depth and hyphen count.</div>
+          </div>
+
+          <!-- 4. Domain Age & Registration (RDAP) -->
+          <div class="check-card" id="card-rdap">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="check-badge" id="badge-rdap">PENDING</span>
+                <h4>Domain Age & Registration (RDAP)</h4>
+              </div>
+            </div>
+            <p class="card-desc" id="desc-rdap">Querying public Registration Data Access Protocol...</p>
+            <div class="card-meta" id="meta-rdap">Domains under 30 days old pose elevated phishing risk.</div>
+          </div>
+
+          <!-- 5. Phishing Threat Intelligence -->
+          <div class="check-card" id="card-threat">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="check-badge" id="badge-threat">PENDING</span>
+                <h4>Phishing Threat Intelligence</h4>
+              </div>
+            </div>
+            <p class="card-desc" id="desc-threat">Checking against verified phishing and malware signatures...</p>
+            <div class="card-meta" id="meta-threat">Safe Browsing & local threat databases.</div>
+          </div>
+
+          <!-- 6. Whitelist Status -->
+          <div class="check-card" id="card-whitelist">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="check-badge" id="badge-whitelist">NEUTRAL</span>
+                <h4>User Whitelist Status</h4>
+              </div>
+            </div>
+            <p class="card-desc" id="desc-whitelist">Checking trusted domain lists...</p>
+            <div class="card-meta" id="meta-whitelist">Whitelisting suppresses heuristics, not confirmed threats.</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Actionable Advice -->
+      <section class="report-section">
+        <h3 class="section-heading">Recommended User Action</h3>
+        <div id="advice-box" class="advice-box advice-safe">
+          <h4 id="advice-title">Safe Browsing Recommendations</h4>
+          <p id="advice-body">No suspicious traits detected. Ensure you recognize the destination before entering credentials.</p>
+        </div>
+      </section>
+
+      <!-- Metadata & Privacy Disclaimer -->
+      <footer class="report-footer">
+        <div class="meta-info">
+          <span>Scan Generated: <strong id="report-timestamp">--</strong></span>
+          <span>Engine: <strong>LoginGuard v1.0.0 (Manifest V3)</strong></span>
+        </div>
+        <p class="disclaimer">
+          <strong>Privacy Note:</strong> LoginGuard analyzes URLs, hostnames, and public registry records. It never reads form inputs, usernames, passwords, or keystrokes. A "SAFE" verdict denotes an absence of known risk factors, not a total security guarantee.
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="report.js" type="module"></script>
+</body>
+</html>

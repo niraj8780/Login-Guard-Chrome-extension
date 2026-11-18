@@ -1,0 +1,23 @@
+{
+  "name": "loginguard-backend",
+  "version": "1.0.0",
+  "description": "Optional caching and threat intelligence proxy backend for LoginGuard Chrome Extension",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  },
+  "keywords": [
+    "phishing-detection",
+    "chrome-extension",
+    "threat-intelligence",
+    "rdap",
+    "safebrowsing"
+  ],
+  "author": "LoginGuard Security Team",
+  "license": "MIT"
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoginGuard Test Laboratory</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 650px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #38bdf8;
+    }
+    p {
+      color: #94a3b8;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .test-card {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    button {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      margin-top: 8px;
+    }
+    button:hover {
+      background: #0369a1;
+    }
+    .secondary-btn {
+      background: #334155;
+    }
+    .secondary-btn:hover {
+      background: #475569;
+    }
+    .alert-banner {
+      background: rgba(56, 189, 248, 0.1);
+      border-left: 4px solid #38bdf8;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #bae6fd;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>LoginGuard Test Laboratory</h1>
+    <p>This page simulates various login scenarios to verify LoginGuard's automatic detection, MutationObserver tracking, and overlay rendering.</p>
+
+    <div class="alert-banner">
+      <strong>Active Test Mode:</strong> When loaded with LoginGuard enabled, an automatic security verdict overlay should slide into the top-right corner of this page.
+    </div>
+
+    <!-- Static Login Form -->
+    <div class="test-card">
+      <h2 style="font-size: 16px; margin-bottom: 14px;">Static Login Form (Standard DOM)</h2>
+      <div class="form-group">
+        <label>Student / Username ID</label>
+        <input type="text" placeholder="student@college.edu">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="••••••••••••">
+      </div>
+      <button type="button">Sign In</button>
+    </div>
+
+    <!-- Dynamic Modal Insertion -->
+    <div class="test-card">
+      <h2 style="font-size: 16px; margin-bottom: 14px;">Dynamic DOM Injection Test (MutationObserver)</h2>
+      <p style="margin-bottom: 12px;">Test whether LoginGuard detects dynamically rendered login modals (like single-page applications or popup modals).</p>
+      <button type="button" id="btn-inject-modal">Render Dynamic Login Modal</button>
+      <div id="dynamic-container" style="margin-top: 16px;"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('btn-inject-modal').addEventListener('click', () => {
+      const container = document.getElementById('dynamic-container');
+      container.innerHTML = `
+        <div style="background: #0f172a; border: 1px solid #38bdf8; border-radius: 8px; padding: 16px;">
+          <h3 style="font-size: 14px; color: #38bdf8; margin-bottom: 10px;">Dynamically Inserted Secure Portal</h3>
+          <input type="password" placeholder="Dynamic Password Field" style="margin-bottom: 10px;">
+          <br>
+          <span style="font-size: 11px; color: #94a3b8;">LoginGuard MutationObserver triggered automatically!</span>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
